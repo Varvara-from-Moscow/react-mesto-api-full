@@ -1,0 +1,30 @@
+
+.header__nav {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 24px;
+    transition: 0.5s ease;
+}
+.header__nav:hover {
+    opacity: 50%;
+    transition: 0.5s ease;
+  }
+
+.header__nav:last-of-type {
+    margin-right: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .header__nav {
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 16px;
+        margin-right: 0;
+    }
+  }
+
+    

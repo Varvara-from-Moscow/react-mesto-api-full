@@ -1,0 +1,19 @@
+.infoTooltip__title {
+    max-width: 358px;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    margin: 0;
+    margin-left: 36px;
+    margin-right: 36px;
+}
+
+@media screen and (max-width: 600px) {
+    .infoTooltip__title {
+      min-width: 244px;
+      /*margin-left: 18px;
+      margin-right: 18px;*/
+      margin: auto;
+    }
+  }

@@ -1,0 +1,22 @@
+.login__subtitle_enter {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.login__subtitle_enter:hover {
+  opacity: 50%;
+  transition: 0.5s ease;
+}
+
+@media screen and (max-width: 500px) {
+    .login__subtitle_enter {
+        font-size: 14px;
+        line-height: 17px;
+    }
+  }

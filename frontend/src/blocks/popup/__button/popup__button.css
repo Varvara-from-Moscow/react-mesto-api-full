@@ -1,0 +1,32 @@
+/*разблокированный стиль*/
+
+.popup__button {
+  width: 358px;
+  height: 50px;
+  background-color: black;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.78px;
+  padding: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  margin-top: 32px;
+  transition: 0.5s ease;
+}
+
+.popup__button:hover {
+  opacity: 80%;
+  transition: 0.5s ease;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__button {
+    margin-top: 29px;
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

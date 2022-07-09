@@ -1,0 +1,6 @@
+.popup__picture-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 75vw;
+    max-height: 1104px;
+  }

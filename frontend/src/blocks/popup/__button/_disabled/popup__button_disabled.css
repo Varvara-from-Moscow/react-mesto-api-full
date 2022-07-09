@@ -1,0 +1,33 @@
+
+.popup__button_disabled {
+  width: 358px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  opacity: 20%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.78px;
+  padding: 0;
+  border-radius: 2px;
+  cursor: default;
+  margin-top: 32px;
+  transition: 0.5s ease;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+@media screen and (max-width: 600px) {
+  .popup__button_disabled {
+    margin-top: 29px;
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

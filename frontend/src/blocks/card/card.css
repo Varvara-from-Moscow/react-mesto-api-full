@@ -1,0 +1,10 @@
+.card {
+  min-width: 282px;
+  height: 362px;
+  list-style-type: none;
+  background-color: #fff;
+  color: black;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}

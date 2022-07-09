@@ -1,0 +1,42 @@
+.page {
+  /*min-width: 320px;
+  max-width: 1280px;*/
+  width: 100%;
+  height: 100%;
+  font-family: "Inter", "Arial", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding-left: 200px;
+  padding-right: 200px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1060px) {
+  .page {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+}
+
+@media screen and (max-width: 957px) {
+  .page {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .page {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .page {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

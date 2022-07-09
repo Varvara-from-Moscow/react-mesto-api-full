@@ -1,0 +1,18 @@
+
+.login__input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #CCCCCC;
+    height: 40px;
+    color: #fff;
+    background-color: black;
+  }
+  
+  .login__input:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  
