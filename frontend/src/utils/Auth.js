@@ -6,47 +6,34 @@ export const BASE_URL = 'https://api.mestoApp.nomoredomains.xyz';
     }
       return Promise.reject(`Ошибка: ${res.status}`);
   }
- /*       
-export const register = ( {password, email} ) => {
-    return fetch(`${BASE_URL}/signup`, {
-      method: 'POST',
+
+export const register = ( password, email ) => {
+  return fetch(`${BASE_URL}/signup`, {
+    credentials: 'include',
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        password: password,
-        email: email 
-        })
-    }).then((res) => {
-      console.log(res);
-      return checkResponse(res);
-    });
-  }; */
-  export const register = (email, password) => {
-    return fetch(`${BASE_URL}/signup`, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email, 
-            password })
+        password,
+        email
+      })
     })
-        .then(checkResponse)
+  .then(checkResponse)
 }; 
 
 export const authorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
+    credentioals: 'include',
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      //'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({password, email})
   })
-  .then((response => response.json()))
+  .then(checkResponse)
+  //.then((response => response.json()))
   .then((data) => {
     if (data.token){
       localStorage.setItem('token', data.token);
@@ -59,13 +46,13 @@ export const authorize = (password, email) => {
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
+    credentials: 'include',
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      //'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },  
-  }).then((res) => {
-    return checkResponse(res);
-  });
+  })
+  .then(checkResponse)
 };

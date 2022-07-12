@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const { login, createUser } = require('./controllers/users');
+const cors = require('cors');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./Errors/NotFoundError');
 const handleErrors = require('./middlewares/errors');
@@ -16,12 +17,27 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true, family: 4 });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(requestLogger);
+
+app.use(cors({
+  credentials: true,
+  origin: [
+    'https://localhost:3000',
+    'https://domainname.mestoApp.nomoredomains.xyz',
+    'http://domainname.mestoApp.nomoredomains.xyz',
+    'http://api.mestoApp.nomoredomains.xyz',
+    'https://api.mestoApp.nomoredomains.xyz',
+  ],
+}));
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадет');
+  }, 0);
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -40,6 +56,8 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
+//app.get('./signout', logout);
+
 app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/cards'));
@@ -47,6 +65,9 @@ app.use(require('./routes/cards'));
 app.all('*', () => {
   throw new NotFoundError('Страница не найдена');
 });
+
+mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true, family: 4 });
+
 app.use(errorLogger);
 app.use(errors());
 app.use(handleErrors);
@@ -54,3 +75,4 @@ app.use(handleErrors);
 app.listen(PORT);
 
 module.exports = { app };
+//logout

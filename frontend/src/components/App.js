@@ -17,7 +17,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from './InfoTooltip';
 
 
-
 function App() {
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
