@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
-const { login, createUser } = require('./controllers/users');
 const cors = require('cors');
+const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./Errors/NotFoundError');
 const handleErrors = require('./middlewares/errors');
@@ -56,8 +56,6 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-//app.get('./signout', logout);
-
 app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/cards'));
@@ -75,4 +73,3 @@ app.use(handleErrors);
 app.listen(PORT);
 
 module.exports = { app };
-//logout
