@@ -35,7 +35,7 @@ function App() {
   const history = useHistory();
 
   function signOut(){
-    localStorage.removeItem('token');//// как его удалить?
+    localStorage.removeItem('token');
     setLoggedIn(false)
     setUserEmail("")
     history.push('/login');
@@ -240,12 +240,6 @@ function App() {
           onSignOut={signOut}
       />
 
-      <Route path="/sign-up">
-      </Route>
-
-      <Route path="/sign-in">
-      </Route>
-
       <Route>
           {loggedIn ? (
             <Redirect to="/my-profile" />
@@ -259,7 +253,7 @@ function App() {
             onLogin={handleLogin}/>
       </Route>
 
-      <Route path="/register">
+      <Route path="/signup">
             <Register 
             onRegister={handleRegSubmit}
             />

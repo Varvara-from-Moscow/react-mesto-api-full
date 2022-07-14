@@ -12,8 +12,8 @@ const JWT_TOKEN = 'SECRET';
 
 module.exports.createUser = (req, res, next) => {
   const {
-    email,
     password,
+    email,
     name,
     about,
     avatar,
@@ -25,8 +25,8 @@ module.exports.createUser = (req, res, next) => {
     } else {
       bcrypt.hash(password, 10)
         .then((hash) => User.create({
-          email,
           password: hash,
+          email,
           name,
           about,
           avatar,

@@ -25,7 +25,7 @@ app.use(requestLogger);
 app.use(cors({
   credentials: true,
   origin: [
-    'https://localhost:3000',
+    'https://localhost:3001',
     'https://domainname.mestoApp.nomoredomains.xyz',
     'http://domainname.mestoApp.nomoredomains.xyz',
     'http://api.mestoApp.nomoredomains.xyz',
