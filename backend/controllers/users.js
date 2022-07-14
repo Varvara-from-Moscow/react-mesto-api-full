@@ -59,7 +59,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_TOKEN, { expiresIn: '7d' });
       return res
-        .cookie('jwt', token, { httpOnly: true, sameSite: true })
+        .cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true })
         .status(200).send({
           email: user.email,
           name: user.name,

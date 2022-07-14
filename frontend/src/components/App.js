@@ -85,7 +85,8 @@ function App() {
   function tokenCheck() {
     // если у пользователя есть токен в localStorage,
     // эта функция проверит валидность токена
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+   
     if (token){
       // проверим токен
       auth.getContent(token).then((res) => {
