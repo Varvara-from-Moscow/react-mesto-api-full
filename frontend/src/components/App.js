@@ -242,18 +242,18 @@ function App() {
 
       <Route>
           {loggedIn ? (
-            <Redirect to="/my-profile" />
+            <Redirect to="/cards" />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to="/signin" />
           )}
       </Route>
 
-      <Route exact path="/login">
+      <Route exact path="/signin">
             <Login  
             onLogin={handleLogin}/>
       </Route>
 
-      <Route path="/register">
+      <Route path="/signup">
             <Register 
             onRegister={handleRegSubmit}
             />
@@ -318,3 +318,5 @@ function App() {
 }
 
 export default App;
+
+//my-profile
