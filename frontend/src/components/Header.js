@@ -1,7 +1,6 @@
 import React from 'react';
 import headerLogo from '../images/logo.svg';
 import { Link } from 'react-router-dom';
-//import {CurrentUserContext} from '../contexts/CurrentUserContext'
 import { Route } from 'react-router-dom';
 
 function Header({loggedIn, userEmail, onSignOut}) {
