@@ -19,11 +19,11 @@ function Header({loggedIn, userEmail, onSignOut}) {
         </ul>
       :
       (<>
-      <Route path="/login">
-        <Link to="/register" className="header__nav-link header__nav-reg">Регистрация</Link>
+      <Route path="/signin">
+        <Link to="/signup" className="header__nav-link header__nav-reg">Регистрация</Link>
       </Route>
-      <Route path="/register">
-        <Link to="/login" className="header__nav-link">Войти</Link>
+      <Route path="/signup">
+        <Link to="/signin" className="header__nav-link">Войти</Link>
       </Route>
       </>)
     }

@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const cors = require('cors');
 const { login, createUser } = require('./controllers/users');
-const auth = require('./middlewares/auth');
+//const auth = require('./middlewares/auth');
 const NotFoundError = require('./Errors/NotFoundError');
 const handleErrors = require('./middlewares/errors');
 const { Reg } = require('./utils/const');
@@ -26,6 +26,7 @@ app.use(cors({
   credentials: true,
   origin: [
     'https://localhost:3001',
+    'https://localhost:3000',
     'https://domainname.mestoApp.nomoredomains.xyz',
     'http://domainname.mestoApp.nomoredomains.xyz',
     'http://api.mestoApp.nomoredomains.xyz',
@@ -46,7 +47,7 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-app.post('/register ', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
@@ -56,7 +57,7 @@ app.post('/register ', celebrate({
   }),
 }), createUser);
 
-app.use(auth);
+//app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/cards'));
 
