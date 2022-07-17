@@ -68,7 +68,7 @@ function App() {
           .then(() => {
             setUserEmail(email)
             setLoggedIn(true)
-            history.push('/my-profile')
+            history.push('/')
           })
       .catch((err) => {
         setIsInfoTooltip(true)
@@ -93,7 +93,7 @@ function App() {
         if (res){
           setUserEmail(res.data.email)
           setLoggedIn(true)
-          history.push('/my-profile')
+          history.push('/')
         }
       }) 
       .catch((err) => {
@@ -242,7 +242,7 @@ function App() {
 
       <Route>
           {loggedIn ? (
-            <Redirect to="/my-profile" />
+            <Redirect to="/" />
           ) : (
             <Redirect to="/signin" />
           )}
@@ -260,7 +260,7 @@ function App() {
       </Route>
 
       <ProtectedRoute
-          path="/my-profile"
+          path="/"
           loggedIn={loggedIn}
           component={MyProfile}
           onEditProfile={handleEditProfileClick}

@@ -7,20 +7,22 @@ export const BASE_URL = 'https://api.mestoApp.nomoredomains.xyz';
       return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-export const register = ( email, password ) => {
+export const register = ( {password, email} ) => {
   return fetch(`${BASE_URL}/signup`, {
     credentials: 'include',
-      method: "POST",
-      headers: {
-        "Accept":"application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email,
-        password
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      password: password,
+      email: email 
       })
-    })
-  .then(checkResponse)
+  }).then((res) => {
+    console.log(res);
+    return checkResponse(res);
+  });
 }; 
 
 export const authorize = (password, email) => {
