@@ -81,7 +81,8 @@ export default class Api{
 }
 
 const api = new Api({
-  url:'https://api.mestoApp.nomoredomains.xyz',
+  //url:'https://api.mestoApp.nomoredomains.xyz',
+  url: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }

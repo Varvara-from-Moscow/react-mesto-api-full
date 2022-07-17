@@ -64,7 +64,7 @@ function App() {
     auth.authorize(password, email)
       .then ((token) => {
         auth.getContent(token)
-          //.then(()=>{console.log(token)})
+          .then(()=>{console.log(token)})
           .then(() => {
             setUserEmail(email)
             setLoggedIn(true)
@@ -77,6 +77,23 @@ function App() {
       })
       })
   }
+
+/*
+  function handleLoginSubmit(email, password) {
+    auth.authorization(email, password)
+          .then((res) => {
+            if(res) {
+              localStorage.setItem('jwt', res.token)
+              setEmail(email);
+              setLoggedIn(true);
+              history.replace({ pathname: "/" });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+  }
+*/
 
   React.useEffect(() => {
     tokenCheck();

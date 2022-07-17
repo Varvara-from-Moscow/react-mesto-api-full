@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://api.mestoApp.nomoredomains.xyz';
+//export const BASE_URL = 'https://api.mestoApp.nomoredomains.xyz';
+export const BASE_URL = 'http://localhost:3000';
 
   function checkResponse(res) {
     if (res.ok) {
@@ -36,7 +37,7 @@ export const authorize = (password, email) => {
     body: JSON.stringify({password, email})
   })
   .then(checkResponse)
-  //.then((response => response.json()))
+  .then((response => response.json()))
   .then((data) => {
     if (data.token){
       localStorage.setItem('token', data.token);
@@ -45,14 +46,13 @@ export const authorize = (password, email) => {
   })
   .catch(err => console.log(err))
 };
-  
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     credentials: 'include',
     method: 'GET',
     headers: {
-      //'Accept': 'application/json',
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },  
