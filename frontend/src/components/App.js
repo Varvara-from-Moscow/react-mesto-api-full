@@ -38,7 +38,7 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false)
     setUserEmail("")
-    history.push('/login');
+    history.push('/signin');
   }
 
   function handleRegSubmit(login){
@@ -51,7 +51,7 @@ function App() {
       setIsInfoTooltip(true)
     }) 
     .then((res) => {
-      history.push('/login');
+      history.push('/signin');
     })
     .catch((err) => {
       setIsInfoTooltip(true)
@@ -242,7 +242,7 @@ function App() {
 
       <Route>
           {loggedIn ? (
-            <Redirect to="/cards" />
+            <Redirect to="/my-profile" />
           ) : (
             <Redirect to="/signin" />
           )}

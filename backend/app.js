@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const cors = require('cors');
 const { login, createUser } = require('./controllers/users');
-//const auth = require('./middlewares/auth');
+const auth = require('./middlewares/auth');
 const NotFoundError = require('./Errors/NotFoundError');
 const handleErrors = require('./middlewares/errors');
 const { Reg } = require('./utils/const');
@@ -57,7 +57,7 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-//app.use(auth);
+app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/cards'));
 
@@ -71,6 +71,10 @@ app.use(errorLogger);
 app.use(errors());
 app.use(handleErrors);
 
-app.listen(PORT);
+//app.listen(PORT);
+
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
 
 module.exports = { app };

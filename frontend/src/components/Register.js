@@ -53,7 +53,7 @@ function Register({onRegister}) {
                 </button>
       </form>
 
-      <p className="login__subtitle">Уже зарегистрированы?<Link to="/login" className="login__subtitle_enter"> Войти</Link></p>
+      <p className="login__subtitle">Уже зарегистрированы?<Link to="/signin" className="login__subtitle_enter"> Войти</Link></p>
 
     </section>  
       
