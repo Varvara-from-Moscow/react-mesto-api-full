@@ -1,9 +1,13 @@
-
-export default class Api{
+/*export default class Api{
   constructor(data){
     this._url = data.url;
     this._headers = data.headers;
-  }
+  }*/
+  export default class Api {
+    constructor({url, headers}) {
+        this._url = url;
+        this._headers = headers;
+    }
 
   _checkResponse(res) {
     if (res.ok) {
@@ -14,6 +18,7 @@ export default class Api{
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
+      credentials: 'include',
       method:'GET',
       headers: this._headers
     })
@@ -22,6 +27,7 @@ export default class Api{
 
   setUserInfo(userData) {
     return fetch(`${this._url}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -34,6 +40,7 @@ export default class Api{
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
+      credentials: 'include',
       method:'GET',
       headers: this._headers
     })
@@ -42,6 +49,7 @@ export default class Api{
 
   addUserCard(data) {
     return fetch(`${this._url}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -54,6 +62,7 @@ export default class Api{
 
   deleteCard(id) {
     return fetch (`${this._url}/cards/${id}`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers
     })
@@ -62,6 +71,7 @@ export default class Api{
 
   changeLikeStatus(id, isLiked) {
     return fetch (`${this._url}/cards/${id}/likes`, {
+      credentials: 'include',
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers
     })
@@ -70,6 +80,7 @@ export default class Api{
 
   updateUserAvatar(data) {
     return fetch (`${this._url}/users/me/avatar`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -81,8 +92,7 @@ export default class Api{
 }
 
 const api = new Api({
-  //url:'https://api.mestoApp.nomoredomains.xyz',
-  url: 'http://localhost:3000',
+  url:'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }

@@ -16,7 +16,6 @@ import Register from './Register';
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from './InfoTooltip';
 
-
 function App() {
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
@@ -35,7 +34,7 @@ function App() {
   const history = useHistory();
 
   function signOut(){
-    localStorage.removeItem('token');
+    localStorage.removeItem('token');//// как его удалить?
     setLoggedIn(false)
     setUserEmail("")
     history.push('/signin');
@@ -62,13 +61,14 @@ function App() {
 
   function handleLogin(password, email){
     auth.authorize(password, email)
-      .then ((token) => {
+      .then ((res) => {
+        const token = res.token
         auth.getContent(token)
-          .then(()=>{console.log(token)})
+          //.then(()=>{console.log(token)})
           .then(() => {
             setUserEmail(email)
             setLoggedIn(true)
-            history.push('/')
+            history.push('/my-profile')
           })
       .catch((err) => {
         setIsInfoTooltip(true)
@@ -79,65 +79,52 @@ function App() {
   }
 
 /*
-  function handleLoginSubmit(email, password) {
-    auth.authorization(email, password)
-          .then((res) => {
-            if(res) {
-              localStorage.setItem('jwt', res.token)
-              setEmail(email);
-              setLoggedIn(true);
-              history.replace({ pathname: "/" });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-  }
-*/
-
   React.useEffect(() => {
     tokenCheck();
   }, []);
 
   function tokenCheck() {
-    // если у пользователя есть токен в localStorage,
+    // если у пользователя есть токен в cookie,
     // эта функция проверит валидность токена
-    const token = localStorage.getItem('token');
-   
+      const token = document.cookie.jwt;
+      alert(token);//undefined
     if (token){
       // проверим токен
       auth.getContent(token).then((res) => {
         if (res){
           setUserEmail(res.data.email)
           setLoggedIn(true)
-          history.push('/')
+          history.push('/my-profile')
         }
-      }) 
+      })
       .catch((err) => {
         console.log(err)
       })
     }
-  } 
+  } */
 
-  React.useEffect(() => {
-    api.getInitialCards()
-    .then((cards) => {
-      setCards(cards);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  },[]);
+React.useEffect(() => {
+  api.getInitialCards()
+  .then((data) => {
+    alert(data)
+    setCards(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+},[loggedIn]);
 
-  React.useEffect(() => {
-    api.getUserInfo()
-    .then((data) => {
-      setCurrentUser(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  },[]);
+React.useEffect(() => {
+  api.getUserInfo()
+  .then((data) => {
+    setCurrentUser(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+},[loggedIn]);
+
+
 
 
   function handleCardLike(card) {
@@ -259,7 +246,7 @@ function App() {
 
       <Route>
           {loggedIn ? (
-            <Redirect to="/" />
+            <Redirect to="/my-profile" />
           ) : (
             <Redirect to="/signin" />
           )}
@@ -277,7 +264,7 @@ function App() {
       </Route>
 
       <ProtectedRoute
-          path="/"
+          path="/my-profile"
           loggedIn={loggedIn}
           component={MyProfile}
           onEditProfile={handleEditProfileClick}
@@ -335,5 +322,3 @@ function App() {
 }
 
 export default App;
-
-//my-profile

@@ -12,8 +12,8 @@ const JWT_TOKEN = 'SECRET';
 
 module.exports.createUser = (req, res, next) => {
   const {
-    password,
     email,
+    password,
     name,
     about,
     avatar,
@@ -25,8 +25,8 @@ module.exports.createUser = (req, res, next) => {
     } else {
       bcrypt.hash(password, 10)
         .then((hash) => User.create({
-          password: hash,
           email,
+          password: hash,
           name,
           about,
           avatar,
@@ -59,13 +59,8 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_TOKEN, { expiresIn: '7d' });
       return res
-        .cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true })
-        .status(200).send({
-          email: user.email,
-          name: user.name,
-          about: user.about,
-          avatar: user.avatar,
-        });
+        .cookie('jwt', token, { httpOnly: true, sameSite: true })
+        .send({ token, user });
     })
     .catch(() => {
       next(new AuthError('Ошибка доступа'));
@@ -85,7 +80,7 @@ module.exports.getСurrentUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Ошибка, пользователь не найден');
       }
-      return res.status(200).send({ data: user });
+      return res.status(200).send({ user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
