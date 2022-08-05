@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -8,7 +9,7 @@ const CastError = require('../Errors/CastError');
 const ConflictError = require('../Errors/ConflictError');
 const AuthError = require('../Errors/AuthError');
 
-const JWT_TOKEN = 'SECRET';
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -57,10 +58,10 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_TOKEN, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'SECRET_KEY', { expiresIn: '7d' });
       return res
         .cookie('jwt', token, { httpOnly: true, sameSite: true })
-        .send({ token, user });
+        .send({ token });
     })
     .catch(() => {
       next(new AuthError('Ошибка доступа'));
@@ -94,11 +95,12 @@ module.exports.getСurrentUser = (req, res, next) => {
 module.exports.getUser = (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
+    // eslint-disable-next-line consistent-return
     .then((user) => {
       if (!user) {
         return next(new NotFoundError('Ошибка, пользователь по указанному _Id не найден'));
       }
-      return res.status(200).send({ user });
+      res.status(200).send({ user });
     })
     .catch(next);
 };
@@ -110,7 +112,7 @@ module.exports.updateAvatar = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Ошибка, пользователь не найден');
       }
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -127,7 +129,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Ошибка, пользователь не найден');
       }
-      return res.send({ data: user });
+      return res.send(user);
     }).catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         throw new CastError('Введены некорректные данные');

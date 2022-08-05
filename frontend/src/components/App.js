@@ -34,7 +34,6 @@ function App() {
   const history = useHistory();
 
   function signOut(){
-    localStorage.removeItem('token');//// как его удалить?
     setLoggedIn(false)
     setUserEmail("")
     history.push('/signin');
@@ -62,9 +61,8 @@ function App() {
   function handleLogin(password, email){
     auth.authorize(password, email)
       .then ((res) => {
-        const token = res.token
+        const token = res.token;
         auth.getContent(token)
-          //.then(()=>{console.log(token)})
           .then(() => {
             setUserEmail(email)
             setLoggedIn(true)
@@ -78,36 +76,10 @@ function App() {
       })
   }
 
-/*
-  React.useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  function tokenCheck() {
-    // если у пользователя есть токен в cookie,
-    // эта функция проверит валидность токена
-      const token = document.cookie.jwt;
-      alert(token);//undefined
-    if (token){
-      // проверим токен
-      auth.getContent(token).then((res) => {
-        if (res){
-          setUserEmail(res.data.email)
-          setLoggedIn(true)
-          history.push('/my-profile')
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    }
-  } */
-
 React.useEffect(() => {
   api.getInitialCards()
-  .then((data) => {
-    alert(data)
-    setCards(data);
+  .then((cards) => {
+    setCards(cards.data);
   })
   .catch((err) => {
     console.log(err);
@@ -117,7 +89,7 @@ React.useEffect(() => {
 React.useEffect(() => {
   api.getUserInfo()
   .then((data) => {
-    setCurrentUser(data);
+    setCurrentUser(data.user);
   })
   .catch((err) => {
     console.log(err);
@@ -125,11 +97,9 @@ React.useEffect(() => {
 },[loggedIn]);
 
 
-
-
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeStatus(card._id, !isLiked)
         .then((newCard) => {
@@ -160,7 +130,11 @@ React.useEffect(() => {
     setShowLoading(true);
     api.setUserInfo(userData)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser({
+          ...currentUser,
+          name: data.name,
+          about: data.about
+        });
         closeAllPopups();
       })
       .catch((err) => {
@@ -171,35 +145,35 @@ React.useEffect(() => {
     })
   }
 
-  function handleUpdateAvatar(data) {
-    setShowLoading(true);
-    api.updateUserAvatar(data)
-      .then((data) => {
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setShowLoading(false);
+function handleUpdateAvatar(data) {
+  setShowLoading(true);
+  api.updateUserAvatar(data)
+    .then((data) => {
+      setCurrentUser({...currentUser, avatar: data.avatar});
+      closeAllPopups();
     })
-  }
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      setShowLoading(false);
+  })
+}
 
-  function handleAddPlaceSubmit(data) {
-    setShowLoading(true);
-    api.addUserCard(data)
-      .then((res) => {
-        setCards([res, ...cards]);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setShowLoading(false);
+function handleAddPlaceSubmit(data) {
+  setShowLoading(true);
+  api.addUserCard(data)
+    .then((res) => {
+      setCards([res, ...cards]);
+      closeAllPopups();
     })
-  }
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      setShowLoading(false);
+    })
+}
 
   function handleCardClick(card) {
     setSelectedCard(card);

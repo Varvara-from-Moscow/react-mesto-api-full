@@ -1,8 +1,3 @@
-/*export default class Api{
-  constructor(data){
-    this._url = data.url;
-    this._headers = data.headers;
-  }*/
   export default class Api {
     constructor({url, headers}) {
         this._url = url;
@@ -92,7 +87,7 @@
 }
 
 const api = new Api({
-  url:'http://localhost:3000',
+  url:'https://api.mestoApp.nomoredomains.xyz',
   headers: {
     'Content-Type': 'application/json'
   }
