@@ -35,6 +35,12 @@ app.use(cors({
     'http://domainname.mestoapp.nomoredomains.xyz',
     'http://api.mestoapp.nomoredomains.xyz',
     'https://api.mestoapp.nomoredomains.xyz',
+    'https://api.mestoapp.nomoredomains.xyz/cards',
+    'http://api.mestoapp.nomoredomains.xyz/cards',
+    'https://api.mestoapp.nomoredomains.xyz/users/me',
+    'http://api.mestoapp.nomoredomains.xyz/users/me',
+    'https://api.mestoapp.nomoredomains.xyz/users/me/avatar',
+    'http://api.mestoapp.nomoredomains.xyz/users/me/avatar',
   ],
 }));
 
