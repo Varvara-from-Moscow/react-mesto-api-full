@@ -41,6 +41,8 @@ app.use(cors({
     'http://api.mestoapp.nomoredomains.xyz/users/me',
     'https://api.mestoapp.nomoredomains.xyz/users/me/avatar',
     'http://api.mestoapp.nomoredomains.xyz/users/me/avatar',
+    'https://mestoapp.nomoredomains.xyz',
+    'http://mestoapp.nomoredomains.xyz',
   ],
 }));
 
