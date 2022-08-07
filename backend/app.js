@@ -31,10 +31,10 @@ app.use(cors({
     'http://localhost:3000',
     'https://localhost:3001',
     'https://localhost:3000',
-    'https://domainname.mestoApp.nomoredomains.xyz',
-    'http://domainname.mestoApp.nomoredomains.xyz',
-    'http://api.mestoApp.nomoredomains.xyz',
-    'https://api.mestoApp.nomoredomains.xyz',
+    'https://domainname.mestoapp.nomoredomains.xyz',
+    'http://domainname.mestoapp.nomoredomains.xyz',
+    'http://api.mestoapp.nomoredomains.xyz',
+    'https://api.mestoapp.nomoredomains.xyz',
   ],
 }));
 

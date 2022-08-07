@@ -87,7 +87,7 @@
 }
 
 const api = new Api({
-  url:'https://api.mestoApp.nomoredomains.xyz',
+  url:'https://api.mestoapp.nomoredomains.xyz',
   headers: {
     'Content-Type': 'application/json'
   }

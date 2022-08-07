@@ -1,5 +1,4 @@
-export const BASE_URL = 'https://api.mestoApp.nomoredomains.xyz';
-//export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.mestoapp.nomoredomains.xyz';
 
   function checkResponse(res) {
     if (res.ok) {
