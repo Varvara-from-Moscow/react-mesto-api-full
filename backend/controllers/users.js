@@ -20,29 +20,30 @@ module.exports.createUser = (req, res, next) => {
     avatar,
   } = req.body;
 
-      bcrypt.hash(password, 10)
-        .then((hash) => User.create({
-          email,
-          password: hash,
-          name,
-          about,
-          avatar,
-        }))
-        .then((userData) => res.status(201).send({
-          email: userData.email,
-          id: userData._id,
-          name: userData.name,
-          about: userData.about,
-          avatar: userData.avatar,
-        }))
-        .catch((err) => {
-          if (err.name === 'ValidationError') {
-            return next(new CastError('Введены некорректные данные'));
-          }
-          if (err.code === 11000) {
-            next(new ConflictError('Такой Email уже существует'));
-          } else { next(err); }
-        });
+  bcrypt.hash(password, 10)
+    .then((hash) => User.create({
+      email,
+      password: hash,
+      name,
+      about,
+      avatar,
+    }))
+    .then((userData) => res.status(201).send({
+      email: userData.email,
+      id: userData._id,
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar,
+    }))
+    // eslint-disable-next-line consistent-return
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        return next(new CastError('Введены некорректные данные'));
+      }
+      if (err.code === 11000) {
+        next(new ConflictError('Такой Email уже существует'));
+      } else { next(err); }
+    });
 };
 
 module.exports.login = (req, res, next) => {
@@ -106,7 +107,7 @@ module.exports.updateAvatar = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new CastError('Введены некорректные данные'));
-      }else{ next(err); }
+      } else { next(err); }
     });
 };
 
@@ -121,6 +122,6 @@ module.exports.updateUser = (req, res, next) => {
     }).catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new CastError('Введены некорректные данные'));
-      }else{ next(err); }
+      } else { next(err); }
     });
 };
