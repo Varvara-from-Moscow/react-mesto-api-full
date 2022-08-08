@@ -44,9 +44,8 @@ module.exports.deleteCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new CastError('Введены некорректные данные');
-      }
-      next(err);
+        next (new CastError('Введены некорректные данные'));
+      }else{ next(err); }
     });
 };
 

@@ -20,10 +20,6 @@ module.exports.createUser = (req, res, next) => {
     avatar,
   } = req.body;
 
-  User.findOne({ email }).then((user) => {
-    if (user) {
-      throw new ConflictError('Пользователь с таким email уже зарегистрирован');
-    } else {
       bcrypt.hash(password, 10)
         .then((hash) => User.create({
           email,
@@ -41,17 +37,12 @@ module.exports.createUser = (req, res, next) => {
         }))
         .catch((err) => {
           if (err.name === 'ValidationError') {
-            next(new CastError('Введены некорректные данные'));
+            return next(new CastError('Введены некорректные данные'));
           }
           if (err.code === 11000) {
             next(new ConflictError('Такой Email уже существует'));
-          }
-          next(err);
+          } else { next(err); }
         });
-    }
-  }).catch((err) => {
-    next(err);
-  });
 };
 
 module.exports.login = (req, res, next) => {
@@ -86,9 +77,7 @@ module.exports.getСurrentUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new CastError('Некорректныe данные'));
-      } else {
-        next(err);
-      }
+      } else { next(err); }
     });
 };
 
@@ -116,9 +105,8 @@ module.exports.updateAvatar = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new CastError('Введены некорректные данные');
-      }
-      next(err);
+        next(new CastError('Введены некорректные данные'));
+      }else{ next(err); }
     });
 };
 
@@ -132,8 +120,7 @@ module.exports.updateUser = (req, res, next) => {
       return res.send(user);
     }).catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new CastError('Введены некорректные данные');
-      }
-      next(err);
+        next(new CastError('Введены некорректные данные'));
+      }else{ next(err); }
     });
 };
