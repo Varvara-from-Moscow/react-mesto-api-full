@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.mestoapp.nomoredomains.xyz';
+export const BASE_URL = '//api.mestoapp.nomoredomains.xyz';
 
   function checkResponse(res) {
     if (res.ok) {
